@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>BrainGuard - Focus mode</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Pixelify+Sans:wght@500;700&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Pixelify Sans', 'VT323', monospace;
+      background:
+        repeating-linear-gradient(45deg, transparent 0 28px, rgba(232,150,81,.1) 28px 29px),
+        repeating-linear-gradient(-45deg, transparent 0 28px, rgba(232,150,81,.1) 28px 29px),
+        #f7e7d4;
+      color: #2a1d14; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center; padding: 40px 20px;
+    }
+    .card {
+      max-width: 520px; width: 100%; padding: 0;
+      background: #fff5e9;
+      border: 2px solid #2a1d14; border-radius: 6px;
+      box-shadow: 6px 6px 0 #2a1d14;
+      overflow: hidden;
+      text-align: center;
+    }
+    .card::before {
+      content: ""; display: block; height: 32px;
+      background: #e89651; border-bottom: 2px solid #2a1d14;
+      background-image:
+        radial-gradient(circle 6px at 16px 16px, #fff5e9 50%, transparent 51%),
+        radial-gradient(circle 6px at 16px 16px, #2a1d14 60%, transparent 61%),
+        radial-gradient(circle 6px at 38px 16px, #f4cba1 50%, transparent 51%),
+        radial-gradient(circle 6px at 38px 16px, #2a1d14 60%, transparent 61%),
+        radial-gradient(circle 6px at 60px 16px, #fff5e9 50%, transparent 51%),
+        radial-gradient(circle 6px at 60px 16px, #2a1d14 60%, transparent 61%);
+      background-repeat: no-repeat;
+    }
+    .inner { padding: 30px 36px 36px; }
+    .tag { font-family: 'Press Start 2P', monospace; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: #c87338; }
+    h1 { margin-top: 14px; font-family: 'Press Start 2P', monospace; font-size: 18px; font-weight: 400; line-height: 1.4; color: #2a1d14; }
+    .sub { margin-top: 14px; color: #7a5b42; font-family: 'VT323', monospace; font-size: 17px; line-height: 1.35; }
+    .timer {
+      margin: 24px auto 6px; font-family: 'Press Start 2P', monospace;
+      font-size: 40px; color: #e89651;
+      text-shadow: 3px 3px 0 #2a1d14;
+    }
+    .host { font-family: 'VT323', monospace; font-size: 15px; color: #7a5b42; }
+    .row { margin-top: 28px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    button, a.btn {
+      display: inline-block; padding: 11px 16px;
+      font-family: 'Press Start 2P', monospace; font-size: 9px; font-weight: 400;
+      border-radius: 4px; cursor: pointer; text-decoration: none;
+      border: 2px solid #2a1d14; background: #fff5e9; color: #2a1d14;
+      box-shadow: 3px 3px 0 #2a1d14;
+      transition: transform .08s, box-shadow .08s;
+    }
+    button:hover, a.btn:hover { background: #fce8d0; }
+    button:active, a.btn:active { transform: translate(3px,3px); box-shadow: 0 0 0 #2a1d14; }
+    .primary { background: #e89651; }
+    .primary:hover { background: #f0a868; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="inner">
+      <div class="tag">BrainGuard · Focus mode</div>
+      <h1>Take a beat.<br>You're in focus.</h1>
+      <div class="sub">This site is on your blocklist for the next few minutes. Try thinking through the problem first.</div>
+      <div class="timer" id="timer">--:--</div>
+      <div class="host" id="hostLabel"></div>
+      <div class="row">
+        <a class="btn primary" href="about:blank">Go somewhere quiet</a>
+        <button id="endBtn">End focus session</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const host = params.get("host") || "";
+    const until = parseInt(params.get("until"), 10) || 0;
+    document.getElementById("hostLabel").textContent = host ? `Blocked: ${host}` : "";
+
+    function fmt(ms) {
+      const total = Math.max(0, Math.floor(ms / 1000));
+      const m = Math.floor(total / 60), s = total % 60;
+      return `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+    }
+    function tick() {
+      const remaining = until - Date.now();
+      document.getElementById("timer").textContent = fmt(remaining);
+      if (remaining <= 0) {
+        document.getElementById("timer").textContent = "00:00";
+        clearInterval(t);
+      }
+    }
+    const t = setInterval(tick, 500); tick();
+
+    document.getElementById("endBtn").addEventListener("click", async () => {
+      try {
+        await chrome.runtime.sendMessage({ type: "BRAINGUARD_END_FOCUS" });
+      } catch {}
+      history.back();
+    });
+  </script>
+</body>
+</html>

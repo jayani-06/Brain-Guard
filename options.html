@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>BrainGuard Settings</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="brand">
+        <span class="dot"></span>
+        <h1>BrainGuard</h1>
+      </div>
+      <p class="lede">Tune your daily goal, intervention style, and focus mode blocklist. Everything stays in your browser.</p>
+    </header>
+
+    <section class="card">
+      <h2>Daily AI goal</h2>
+      <p class="hint">Try to stay under this many minutes of AI use per day. Streaks count days you stay under.</p>
+      <div class="row">
+        <input type="number" min="1" max="600" id="aiGoal" />
+        <span class="unit">minutes / day</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Nudge threshold</h2>
+      <p class="hint">When should toast nudges start appearing on AI sites?</p>
+      <div class="row">
+        <input type="number" min="1" max="600" id="nudgeThreshold" />
+        <span class="unit">minutes of AI use</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Intervention intensity</h2>
+      <p class="hint">Strict adds a full-screen "think for 30s" overlay when you're past your goal.</p>
+      <div class="seg" id="intensity">
+        <button data-v="gentle">Gentle</button>
+        <button data-v="medium">Medium</button>
+        <button data-v="strict">Strict</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Focus mode</h2>
+      <p class="hint">During focus sessions, blocked tabs get redirected to a calm reminder page.</p>
+      <label class="check">
+        <input type="checkbox" id="blockAi" />
+        <span>Block all known AI sites in focus mode</span>
+      </label>
+      <div class="row col">
+        <label for="blocklist">Custom blocklist (one host per line)</label>
+        <textarea id="blocklist" rows="5" placeholder="twitter.com&#10;reddit.com&#10;youtube.com"></textarea>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>AI site allowlist</h2>
+      <p class="hint">BrainGuard tracks time and shows nudges on these sites. One host per line.</p>
+      <div class="row col">
+        <label for="aiAllowlist">Host allowlist (exact hostname match)</label>
+        <textarea id="aiAllowlist" rows="5" placeholder="chatgpt.com&#10;claude.ai&#10;gemini.google.com"></textarea>
+      </div>
+      <div class="row col">
+        <label for="aiPathAllowlist">Path allowlist (host + starting path, one per line)</label>
+        <textarea id="aiPathAllowlist" rows="3" placeholder="x.com /i/grok&#10;www.bing.com /chat"></textarea>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Custom nudges</h2>
+      <p class="hint">Add your own nudge messages (one per line). They'll be mixed into the rotation alongside the built-in ones.</p>
+      <div class="row col">
+        <textarea id="customNudges" rows="5" placeholder="Stop. Think. Then maybe ask.&#10;Your brain misses you.&#10;Try it solo for 60 seconds."></textarea>
+      </div>
+      <label class="check">
+        <input type="checkbox" id="onlyCustom" />
+        <span>Use only my custom nudges (skip built-ins)</span>
+      </label>
+    </section>
+
+    <section class="card">
+      <h2>Friction features</h2>
+      <p class="hint">When you blow past your daily AI goal, BrainGuard can step up the resistance.</p>
+      <label class="check">
+        <input type="checkbox" id="ghostWriter" />
+        <span><b>Ghost Writer mode</b> — blur the page for 5s after each prompt and require a 10-word intent statement to unlock the input.</span>
+      </label>
+      <label class="check">
+        <input type="checkbox" id="proofOfThought" />
+        <span><b>Proof of Thought</b> — solve a quick math puzzle or riddle to enter an AI site once you're past your limit.</span>
+      </label>
+    </section>
+
+    <section class="card">
+      <h2>Pomodoro chime</h2>
+      <p class="hint">A soft two-tone chime plays when a work or break phase ends.</p>
+      <label class="check">
+        <input type="checkbox" id="muteChime" />
+        <span>Mute chime sound</span>
+      </label>
+    </section>
+
+    <section class="card">
+      <h2>Data</h2>
+      <p class="hint">Your data lives only in this browser.</p>
+      <div class="actions">
+        <button id="exportBtn" class="primary">Export as JSON</button>
+        <button id="resetAllBtn" class="danger">Reset all data</button>
+      </div>
+    </section>
+
+    <footer>
+      <button id="saveBtn" class="primary big">Save settings</button>
+      <span id="savedTag" class="saved-tag">Saved</span>
+    </footer>
+  </main>
+  <script src="options.js"></script>
+</body>
+</html>

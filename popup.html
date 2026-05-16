@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>BrainGuard</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="hdr">
+      <div class="brand">
+        <div class="dot"></div>
+        <div>
+          <div class="title">BrainGuard</div>
+          <div class="sub" id="todayLabel">Today</div>
+        </div>
+      </div>
+      <button id="openOptions" class="icon-btn" title="Settings">⚙</button>
+    </header>
+
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-tab="today">Today</button>
+      <button class="tab" data-tab="history">History</button>
+      <button class="tab" data-tab="focus">Focus</button>
+    </nav>
+
+    <!-- TODAY -->
+    <section class="pane active" data-pane="today">
+      <div class="cards">
+        <div class="card">
+          <div class="lbl">Screen time</div>
+          <div class="val" id="totalTime">0m</div>
+          <div class="bar"><div class="bar-fill total" id="totalBar"></div></div>
+        </div>
+        <div class="card ai">
+          <div class="lbl">AI usage</div>
+          <div class="val" id="aiTime">0m</div>
+          <div class="bar"><div class="bar-fill ai" id="aiBar"></div></div>
+          <div class="meta">
+            <span id="aiPct">0%</span> of screen time · <span id="aiPrompts">0</span> prompts
+          </div>
+          <div class="goal-row">
+            <span id="goalText">Goal: 30 min</span>
+            <span id="goalState" class="goal-state ok">on track</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="streak-row">
+        <div class="streak">
+          <div class="streak-num" id="streakNum">0</div>
+          <div class="streak-lbl">day streak under goal</div>
+        </div>
+        <div class="streak alt">
+          <div class="streak-num" id="bestStreak">0</div>
+          <div class="streak-lbl">best streak</div>
+        </div>
+      </div>
+
+      <section class="list">
+        <div class="list-hdr">Top sites today</div>
+        <div id="sites" class="sites"></div>
+      </section>
+
+      <footer class="ftr">
+        <button id="resetBtn" class="ghost">Reset today</button>
+        <span class="tag">v1.1</span>
+      </footer>
+    </section>
+
+    <!-- HISTORY -->
+    <section class="pane" data-pane="history">
+      <div class="hist-summary" id="histSummary"></div>
+      <div class="chart" id="chart"></div>
+      <div class="chart-legend">
+        <span><i class="lg total"></i> Screen</span>
+        <span><i class="lg ai"></i> AI</span>
+      </div>
+      <div class="list">
+        <div class="list-hdr">Last 7 days</div>
+        <div id="histList" class="sites"></div>
+      </div>
+    </section>
+
+    <!-- FOCUS -->
+    <section class="pane" data-pane="focus">
+      <div class="focus-card" id="focusCard">
+        <div class="lbl">Focus mode</div>
+        <div class="focus-state" id="focusState">Off</div>
+        <div class="focus-sub" id="focusSub">Block AI sites and stay sharp.</div>
+        <div class="focus-options" id="focusOptions">
+          <button class="chip" data-min="15">15m</button>
+          <button class="chip" data-min="25">25m</button>
+          <button class="chip" data-min="45">45m</button>
+          <button class="chip" data-min="90">90m</button>
+        </div>
+        <button id="endFocusBtn" class="primary danger" style="display:none">End focus session</button>
+      </div>
+
+      <div class="pomo-card" id="pomoCard">
+        <div class="pomo-hd">
+          <div>
+            <div class="lbl">Pomodoro</div>
+            <div class="pomo-phase" id="pomoPhase">Idle</div>
+          </div>
+          <div class="pomo-state" id="pomoState">--:--</div>
+        </div>
+        <div class="pomo-sub" id="pomoSub">Work / break cycles with a badge countdown.</div>
+
+        <div class="pomo-config" id="pomoConfig">
+          <div class="pomo-row">
+            <label>Work
+              <select id="pomoWork">
+                <option value="15">15</option>
+                <option value="25" selected>25</option>
+                <option value="45">45</option>
+                <option value="50">50</option>
+              </select>m
+            </label>
+            <label>Break
+              <select id="pomoBreak">
+                <option value="3">3</option>
+                <option value="5" selected>5</option>
+                <option value="10">10</option>
+              </select>m
+            </label>
+            <label>Long
+              <select id="pomoLong">
+                <option value="10">10</option>
+                <option value="15" selected>15</option>
+                <option value="20">20</option>
+              </select>m
+            </label>
+          </div>
+          <button id="startPomoBtn" class="primary">Start Pomodoro</button>
+        </div>
+        <div class="pomo-actions" id="pomoActions" style="display:none">
+          <button id="skipPomoBtn" class="ghost">Skip phase</button>
+          <button id="stopPomoBtn" class="primary danger">Stop</button>
+        </div>
+      </div>
+
+      <div class="focus-tip">
+        Focus mode redirects blocked tabs. Pomodoro shows a countdown badge on the toolbar icon.
+      </div>
+    </section>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

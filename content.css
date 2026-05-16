@@ -1,0 +1,333 @@
+/* BrainGuard injected styles — retro pixel autumn theme */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Pixelify+Sans:wght@500;700&display=swap');
+
+#brainguard-toast {
+  position: fixed; bottom: 24px; right: 24px; z-index: 2147483647;
+  max-width: 320px; padding: 0;
+  background: #fff5e9;
+  color: #2a1d14;
+  font-family: 'Pixelify Sans', 'VT323', monospace;
+  font-size: 14px; line-height: 1.4;
+  border: 2px solid #2a1d14; border-radius: 6px;
+  box-shadow: 4px 4px 0 #2a1d14;
+  transform: translateY(20px); opacity: 0;
+  transition: all .35s cubic-bezier(.2,.8,.2,1);
+}
+#brainguard-toast.bg-in { transform: translateY(0); opacity: 1; }
+#brainguard-toast.bg-over { background: #fde7d0; }
+#brainguard-toast .bg-hd {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 10px;
+  background: #e89651; color: #fff5e9;
+  font-family: 'Press Start 2P', monospace; font-size: 8px;
+  letter-spacing: .08em; text-transform: uppercase;
+  border-bottom: 2px solid #2a1d14;
+}
+#brainguard-toast .bg-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #fff5e9; border: 1.5px solid #2a1d14;
+}
+#brainguard-toast .bg-x {
+  margin-left: auto; background: #fff5e9; border: 1.5px solid #2a1d14;
+  color: #2a1d14; cursor: pointer; font-size: 12px; line-height: 1;
+  width: 18px; height: 18px; border-radius: 2px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Pixelify Sans', monospace;
+}
+#brainguard-toast .bg-msg {
+  padding: 12px 14px 4px;
+  font-family: 'Pixelify Sans', monospace; font-weight: 500;
+  color: #2a1d14;
+}
+#brainguard-toast .bg-meta {
+  padding: 0 14px 12px;
+  font-family: 'VT323', monospace; font-size: 14px; color: #7a5b42;
+}
+
+#brainguard-overlay {
+  position: fixed; inset: 0; z-index: 2147483647;
+  background:
+    repeating-linear-gradient(45deg, transparent 0 22px, rgba(232,150,81,.18) 22px 23px),
+    repeating-linear-gradient(-45deg, transparent 0 22px, rgba(232,150,81,.18) 22px 23px),
+    rgba(247, 231, 212, .85);
+  backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Pixelify Sans', 'VT323', monospace;
+  animation: bg-fade .25s ease;
+}
+@keyframes bg-fade { from { opacity: 0; } to { opacity: 1; } }
+#brainguard-overlay .bg-ov-card {
+  max-width: 460px; width: calc(100% - 40px); padding: 0;
+  background: #fff5e9;
+  border: 2px solid #2a1d14;
+  border-radius: 6px; color: #2a1d14;
+  box-shadow: 6px 6px 0 #2a1d14;
+  overflow: hidden;
+  position: relative;
+}
+#brainguard-overlay .bg-ov-card::before {
+  content: ""; display: block;
+  height: 28px;
+  background: #e89651;
+  border-bottom: 2px solid #2a1d14;
+  background-image:
+    radial-gradient(circle 5px at 14px 14px, #fff5e9 50%, transparent 51%),
+    radial-gradient(circle 5px at 14px 14px, #2a1d14 60%, transparent 61%),
+    radial-gradient(circle 5px at 32px 14px, #f4cba1 50%, transparent 51%),
+    radial-gradient(circle 5px at 32px 14px, #2a1d14 60%, transparent 61%),
+    radial-gradient(circle 5px at 50px 14px, #fff5e9 50%, transparent 51%),
+    radial-gradient(circle 5px at 50px 14px, #2a1d14 60%, transparent 61%);
+  background-repeat: no-repeat;
+}
+#brainguard-overlay .bg-ov-tag {
+  margin: 0; padding: 14px 22px 0;
+  font-family: 'Press Start 2P', monospace; font-size: 9px;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: #c87338;
+}
+#brainguard-overlay .bg-ov-msg {
+  margin-top: 12px; padding: 0 22px;
+  font-family: 'Pixelify Sans', monospace;
+  font-size: 18px; font-weight: 700; line-height: 1.3;
+  color: #2a1d14;
+}
+#brainguard-overlay .bg-ov-meta {
+  margin-top: 10px; padding: 0 22px;
+  font-family: 'VT323', monospace; font-size: 16px; color: #7a5b42;
+}
+#brainguard-overlay .bg-ov-actions {
+  margin-top: 22px; padding: 0 22px 22px;
+  display: flex; gap: 10px; flex-wrap: wrap;
+}
+#brainguard-overlay button {
+  padding: 10px 14px;
+  font-family: 'Press Start 2P', monospace; font-size: 9px; font-weight: 400;
+  cursor: pointer; border-radius: 4px;
+  border: 2px solid #2a1d14; background: #fff5e9; color: #2a1d14;
+  box-shadow: 3px 3px 0 #2a1d14;
+  transition: transform .08s, box-shadow .08s;
+}
+#brainguard-overlay button:hover:not(:disabled) { background: #fce8d0; }
+#brainguard-overlay button:active:not(:disabled) { transform: translate(3px,3px); box-shadow: 0 0 0 #2a1d14; }
+#brainguard-overlay .bg-ov-think { background: #e89651; color: #2a1d14; }
+#brainguard-overlay .bg-ov-think:hover:not(:disabled) { background: #f0a868; }
+#brainguard-overlay button:disabled { opacity: .6; cursor: default; }
+
+/* Ghost Writer blur */
+.bg-blurred { filter: blur(10px) saturate(0.7) !important; transition: filter .25s ease; pointer-events: none; }
+#brainguard-blur-badge {
+  position: fixed; top: 18px; left: 50%; transform: translateX(-50%);
+  z-index: 2147483647; padding: 8px 14px; border-radius: 4px;
+  background: #fff5e9; color: #2a1d14;
+  font-family: 'Press Start 2P', monospace; font-size: 9px; letter-spacing: .04em;
+  border: 2px solid #2a1d14;
+  box-shadow: 3px 3px 0 #2a1d14;
+  display: flex; align-items: center; gap: 8px;
+}
+#brainguard-blur-badge .bg-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #e89651; border: 1.5px solid #2a1d14;
+  animation: bg-pulse 1s infinite;
+}
+@keyframes bg-pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+
+/* Intent gate (Ghost Writer) */
+#brainguard-intent {
+  position: fixed; inset: 0; z-index: 2147483647;
+  background:
+    repeating-linear-gradient(45deg, transparent 0 22px, rgba(232,150,81,.18) 22px 23px),
+    repeating-linear-gradient(-45deg, transparent 0 22px, rgba(232,150,81,.18) 22px 23px),
+    rgba(247, 231, 212, .85);
+  backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Pixelify Sans', 'VT323', monospace;
+  animation: bg-fade .25s ease;
+}
+#brainguard-intent .bg-ov-card {
+  max-width: 480px; width: calc(100% - 40px); padding: 22px;
+  background: #fff5e9;
+  border: 2px solid #2a1d14; border-radius: 6px; color: #2a1d14;
+  box-shadow: 6px 6px 0 #2a1d14;
+}
+#brainguard-intent .bg-ov-tag {
+  font-family: 'Press Start 2P', monospace; font-size: 9px;
+  letter-spacing: .12em; text-transform: uppercase; color: #c87338;
+}
+#brainguard-intent .bg-ov-msg {
+  margin-top: 12px;
+  font-family: 'Pixelify Sans', monospace; font-size: 18px; font-weight: 700;
+  line-height: 1.3; color: #2a1d14;
+}
+#brainguard-intent .bg-ov-meta {
+  margin-top: 8px;
+  font-family: 'VT323', monospace; font-size: 16px; color: #7a5b42;
+}
+#brainguard-intent .bg-intent-input {
+  margin-top: 16px; width: 100%; box-sizing: border-box;
+  padding: 10px 12px; border-radius: 4px;
+  background: #f7e7d4; color: #2a1d14;
+  border: 2px solid #2a1d14;
+  font-family: 'VT323', monospace; font-size: 16px;
+  resize: vertical; outline: none;
+  box-shadow: inset 2px 2px 0 rgba(42,29,20,.1);
+}
+#brainguard-intent .bg-intent-input:focus { background: #fff5e9; border-color: #c87338; }
+#brainguard-intent .bg-intent-meta {
+  margin-top: 8px;
+  font-family: 'VT323', monospace; font-size: 14px; color: #7a5b42;
+}
+#brainguard-intent .bg-ov-actions { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+#brainguard-intent button {
+  padding: 10px 14px;
+  font-family: 'Press Start 2P', monospace; font-size: 9px;
+  cursor: pointer; border-radius: 4px;
+  border: 2px solid #2a1d14;
+  background: #fff5e9; color: #2a1d14;
+  box-shadow: 3px 3px 0 #2a1d14;
+  transition: transform .08s, box-shadow .08s;
+}
+#brainguard-intent button:hover:not(:disabled) { background: #fce8d0; }
+#brainguard-intent button:active:not(:disabled) { transform: translate(3px,3px); box-shadow: 0 0 0 #2a1d14; }
+#brainguard-intent button:disabled { opacity: .5; cursor: not-allowed; }
+#brainguard-intent .bg-ov-think { background: #e89651; }
+#brainguard-intent .bg-ov-think:hover:not(:disabled) { background: #f0a868; }
+
+/* Proof of Thought puzzle */
+#brainguard-overlay .bg-puzzle {
+  margin: 16px 22px 0; padding: 14px;
+  background: #f7e7d4;
+  border: 2px solid #2a1d14; border-radius: 4px;
+}
+#brainguard-overlay .bg-puzzle-q {
+  font-family: 'Pixelify Sans', monospace;
+  font-size: 16px; font-weight: 700; color: #2a1d14;
+}
+#brainguard-overlay .bg-puzzle-input {
+  margin-top: 12px; width: 100%; box-sizing: border-box;
+  padding: 9px 12px; border-radius: 4px;
+  background: #fff5e9; color: #2a1d14;
+  border: 2px solid #2a1d14;
+  font-family: 'VT323', monospace; font-size: 16px;
+  outline: none;
+}
+#brainguard-overlay .bg-puzzle-input:focus { border-color: #c87338; }
+#brainguard-overlay .bg-puzzle-err {
+  margin-top: 8px;
+  font-family: 'VT323', monospace; font-size: 14px;
+  color: #b04a3a; min-height: 16px;
+}
+#brainguard-overlay .bg-puzzle-host { display: flex; flex-direction: column; }
+#brainguard-overlay .bg-game-show {
+  margin-top: 12px; text-align: center;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 24px; letter-spacing: .15em;
+  color: #2a1d14; padding: 14px; border-radius: 4px;
+  background: #fff5e9; border: 2px dashed #c87338;
+  transition: opacity .3s;
+}
+#brainguard-overlay .bg-game-show.bg-hidden { color: #c87338; opacity: .7; letter-spacing: .25em; }
+#brainguard-overlay .bg-game-meta {
+  margin-top: 8px;
+  font-family: 'VT323', monospace; font-size: 14px;
+  color: #7a5b42; text-align: center;
+}
+#brainguard-overlay .bg-game-input { margin-top: 12px; }
+#brainguard-overlay .bg-game-stroop {
+  margin-top: 12px; text-align: center;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 30px; letter-spacing: .04em;
+  padding: 18px; border-radius: 4px;
+  background: #fff5e9; border: 2px solid #2a1d14;
+}
+#brainguard-overlay .bg-game-choices {
+  margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+}
+#brainguard-overlay .bg-game-chip {
+  padding: 10px 12px;
+  font-family: 'Press Start 2P', monospace; font-size: 9px; font-weight: 400;
+  cursor: pointer;
+  border-radius: 4px; border: 2px solid #2a1d14;
+  background: #fff5e9; color: #2a1d14; text-transform: capitalize;
+  box-shadow: 2px 2px 0 #2a1d14;
+  transition: transform .08s, box-shadow .08s;
+}
+#brainguard-overlay .bg-game-chip:hover { background: #fce8d0; }
+#brainguard-overlay .bg-game-chip:active { transform: translate(2px,2px); box-shadow: 0 0 0 #2a1d14; }
+
+/* Floating draggable mini-panel */
+#brainguard-panel {
+  position: fixed; top: 80px; right: 24px; z-index: 2147483646;
+  width: 240px; padding: 0; border-radius: 6px;
+  background: #fff5e9;
+  color: #2a1d14;
+  font-family: 'Pixelify Sans', 'VT323', monospace;
+  font-size: 13px; line-height: 1.3;
+  border: 2px solid #2a1d14;
+  box-shadow: 4px 4px 0 #2a1d14;
+  user-select: none;
+}
+#brainguard-panel.bg-min .bg-pn-body { display: none; }
+#brainguard-panel .bg-pn-hd {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 10px; cursor: grab;
+  background: #e89651;
+  border-bottom: 2px solid #2a1d14;
+  font-family: 'Press Start 2P', monospace; font-size: 8px;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: #fff5e9;
+}
+#brainguard-panel.bg-dragging .bg-pn-hd { cursor: grabbing; }
+#brainguard-panel .bg-pn-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: #fff5e9; border: 1.5px solid #2a1d14;
+}
+#brainguard-panel .bg-pn-actions { margin-left: auto; display: flex; gap: 4px; }
+#brainguard-panel .bg-pn-btn {
+  background: #fff5e9; border: 1.5px solid #2a1d14; color: #2a1d14;
+  cursor: pointer; font-family: 'Pixelify Sans', monospace; font-size: 12px;
+  line-height: 1; padding: 1px 6px; border-radius: 2px;
+}
+#brainguard-panel .bg-pn-btn:hover { background: #fce8d0; }
+#brainguard-panel .bg-pn-body { padding: 12px; }
+#brainguard-panel .bg-pn-row {
+  display: flex; justify-content: space-between; margin-bottom: 6px;
+  font-family: 'VT323', monospace; font-size: 14px; color: #7a5b42;
+}
+#brainguard-panel .bg-pn-row b {
+  font-family: 'Pixelify Sans', monospace; color: #2a1d14; font-weight: 700;
+}
+#brainguard-panel .bg-pn-bar {
+  margin-top: 8px; height: 12px; border-radius: 2px;
+  background: #f7e7d4; border: 2px solid #2a1d14;
+  padding: 1px; overflow: hidden;
+}
+#brainguard-panel .bg-pn-bar > span {
+  display: block; height: 100%;
+  background: repeating-linear-gradient(90deg, #e89651 0 5px, #c87338 5px 7px);
+  transition: width .3s steps(20, end);
+}
+#brainguard-panel .bg-pn-meta {
+  margin-top: 10px; font-family: 'VT323', monospace; font-size: 12px;
+  color: #7a5b42; line-height: 1.2;
+  padding-top: 8px; border-top: 1px dashed #c87338;
+}
+
+#brainguard-panel .bg-pn-section {
+  margin-top: 12px;
+  font-family: 'Press Start 2P', monospace; font-size: 7px;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: #c87338;
+  padding-top: 8px; border-top: 1px dashed #c87338;
+}
+#brainguard-panel .bg-pn-cats { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
+#brainguard-panel .bg-pn-cat {
+  display: flex; justify-content: space-between;
+  font-family: 'VT323', monospace; font-size: 14px;
+  padding: 3px 7px; border-radius: 2px;
+  background: #f7e7d4; border: 1.5px solid #2a1d14;
+}
+#brainguard-panel .bg-pn-cat span { color: #7a5b42; }
+#brainguard-panel .bg-pn-cat b {
+  font-family: 'Pixelify Sans', monospace;
+  color: #2a1d14; font-weight: 700;
+}

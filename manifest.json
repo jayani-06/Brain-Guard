@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "BrainGuard - Screen & AI Tracker",
+  "version": "1.5.0",
+  "description": "Track screen time and AI usage. Set daily goals, build streaks, and add Ghost Writer + Proof-of-Thought friction when you're past your limit. Configurable AI site allowlist.",
+  "permissions": ["storage", "tabs", "alarms", "scripting", "notifications", "offscreen"],
+  "web_accessible_resources": [
+    { "resources": ["offscreen.html"], "matches": ["<all_urls>"] }
+  ],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "BrainGuard",
+    "default_icon": {
+      "16": "icons/icon.png",
+      "48": "icons/icon.png",
+      "128": "icons/icon.png"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icons/icon.png",
+    "48": "icons/icon.png",
+    "128": "icons/icon.png"
+  }
+}
